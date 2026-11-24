@@ -1,0 +1,6 @@
+ticket_id,customer,priority,date
+T001,Rahul,High,2026-11-24
+T002,Priya,Low,2026-11-23
+T003,Amit,Urgent,2026-11-24
+T004,Kiran,Medium,wrong-date
+T005,,High,2026-11-24

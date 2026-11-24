@@ -1,0 +1,11 @@
+2026-11-24 23:42:57,947 - INFO - Ticket T001 validated successfully
+2026-11-24 23:42:57,947 - INFO - Ticket T002 validated successfully
+2026-11-24 23:42:57,949 - ERROR - Ticket T003 failed validation: 1 validation error for Ticket
+priority
+  Input should be 'Low', 'Medium' or 'High' [type=enum, input_value='Urgent', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.14/v/enum
+2026-11-24 23:42:57,950 - ERROR - Ticket T004 failed validation: 1 validation error for Ticket
+date
+  Input should be a valid date or datetime, invalid character in year [type=date_from_datetime_parsing, input_value='wrong-date', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.14/v/date_from_datetime_parsing
+2026-11-24 23:42:57,950 - INFO - Ticket T005 validated successfully

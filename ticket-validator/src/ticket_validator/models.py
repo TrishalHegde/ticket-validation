@@ -1,40 +1,26 @@
 
-import csv
+from datetime import date
+from enum import Enum
 
-from pydantic import ValidationError
-
-from ticket_validator.models import Ticket
-
-
-def read_tickets(file_path):
-    valid_tickets = []
-    invalid_tickets = []
-
-    with open(file_path, "r", newline="", encoding="utf-8") as file:
-        reader = csv.DictReader(file)
-
-        for row in reader:
-            try:
-                ticket = Ticket(**row)
-                valid_tickets.append(ticket)
-
-            except ValidationError as error:
-                invalid_tickets.append({
-                    "row": row,
-                    "error": str(error)
-                })
-
-    return valid_tickets, invalid_tickets
+from pydantic import BaseModel, field_validator
 
 
-if __name__ == "__main__":
-    valid, invalid = read_tickets("data/tickets.csv")
+class Priority(str, Enum):
+    LOW = "Low"
+    MEDIUM = "Medium"
+    HIGH = "High"
 
-    print("\nVALID TICKETS:")
-    for ticket in valid:
-        print(ticket)
 
-    print("\nINVALID TICKETS:")
-    for ticket in invalid:
-        print(ticket["row"])
-        print(ticket["error"])
+class Ticket(BaseModel):
+    ticket_id: str
+    customer: str
+    priority: Priority
+    date: date
+
+    @field_validator("customer")
+    @classmethod
+    def validate_customer(cls, value):
+        if not value.strip():
+            raise ValueError("Customer name cannot be empty")
+
+        return value
